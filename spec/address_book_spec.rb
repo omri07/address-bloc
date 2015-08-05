@@ -100,6 +100,29 @@ require_relative '../models/address_book.rb'
      end
     end
 
+
+    context "#1_search" do
+     it "searches AddressBdook for a non-existent entry" do
+       book.import_from_csv("entries2.csv")
+       entry = book.iterative_search("Dan")
+       expect(entry).to be_nil
+     end
+
+     it "searches AddrdessBook for Bill" do
+       book.import_from_csv("entries2.csv")
+       entry = book.iterative_search("Bill")
+       expect(entry).instance_of?(Entry)
+       check_entry(entry, "Bill", "555-555-4854", "bill@blocmail.com")
+     end
+
+     it "searches AddredssBook for Bob" do
+       book.import_from_csv("entries2.csv")
+       entry = book.iterative_search("Bob")
+       expect(entry).to be_a Entry
+       check_entry(entry, "Bob", "555-555-5415", "bob@blocmail.com")
+     end
+    end 
+
        # Test the binary_search method
    context "#binary_search" do
      it "searches AddressBook for a non-existent entry" do
@@ -148,7 +171,5 @@ require_relative '../models/address_book.rb'
        entry = book.binary_search("Billy")
        expect(entry).to be_nil
      end  
-
-
    end
  end
