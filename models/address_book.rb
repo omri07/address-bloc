@@ -47,7 +47,6 @@ class AddressBook
  # #3
        mid = (lower + upper) / 2
        mid_name = entries[mid].name
- 
  # #4
        if name == mid_name
          return entries[mid]
